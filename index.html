@@ -21,6 +21,7 @@
     <form action="javascript:agrega();">
       <input id="texto" type="text" required placeholder="Mensaje">
       <button>Enviar</button>
+      <button type="button" onclick="terminaSesión()">Terminar Sesión</button>
     </form>
     <ol id="mensajes"><li><progress max="100">Cargando…</progress></li></ol>
     <script>
@@ -115,7 +116,13 @@
             }
           )
       }
-
+      async function terminaSesión() {
+        try {
+          await auth.signOut();
+        } catch (e) {
+          procesaError(e);
+        }
+      }
       /** Procesa un error. Muestra el objeto en la consola y un cuadro de
        * alerta con el mensaje.
        * @param {Error} e descripción del error. */
